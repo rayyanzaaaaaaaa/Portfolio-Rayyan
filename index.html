@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="shortcut icon" href="DALL·E 2025-02-06 20.25.23 - A modern and sleek logo featuring the letter 'R'. The design should be minimalistic, with bold, futuristic typography. Incorporate a subtle tech or cy.webp" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <title>Muhammad Rayyan Yuwono</title>
+    <style>
+        /* CSS tambahan untuk dropdown menu */
+        .dropdown {
+            display: none; /* Sembunyikan secara default */
+            position: absolute;
+            top: 60px; /* Sesuaikan dengan tinggi nav Anda */
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Contoh warna latar belakang */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .dropdown.show {
+            display: flex; /* Tampilkan ketika kelas 'show' ditambahkan */
+        }
+
+        .dropdown .links {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dropdown .links a {
+            padding: 10px 0;
+            color: white;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .dropdown .links a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown .cancel {
+            margin-top: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        /* Sembunyikan link di nav biasa saat di tampilan mobile dan dropdown terlihat */
+        @media (max-width: 768px) { /* Sesuaikan breakpoint jika perlu */
+            .links {
+                display: none; /* Sembunyikan link di nav default */
+            }
+            .hamburg {
+                display: block !important; /* Pastikan hamburger terlihat */
+            }
+            .nav-container {
+                justify-content: space-between;
+            }
+        }
+
+        /* CSS untuk minimap yang selalu terlihat di bagian lokasi */
+        .location-minimap-always-visible {
+            width: 150px; /* Ukuran minimap persegi (sesuaikan) */
+            height: 150px; /* Ukuran minimap persegi (sesuaikan) */
+            margin-top: 10px; /* Jarak dari teks lokasi di atasnya */
+            border: 2px solid #007bff; /* Border minimap */
+            border-radius: 8px; /* Sudut membulat */
+            overflow: hidden; /* Pastikan konten iframe tidak meluap */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sedikit bayangan */
+            /* Untuk memusatkan minimap jika contact-card lebih lebar */
+            margin-left: auto;
+            margin-right: auto;
+            display: block; /* Agar margin auto berfungsi */
+        }
+
+        .location-minimap-always-visible iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Hapus border iframe */
+        }
+
+        /* Responsive layout untuk bagian contact, jika belum ada di style.css Anda */
+        @media (min-width: 769px) {
+            .contact-content {
+                display: flex;
+                flex-wrap: wrap; /* Izinkan wrap pada item */
+                gap: 30px; /* Jarak antar kolom */
+                justify-content: center;
+            }
+
+            .contact-info,
+            .contact-form {
+                flex: 1; /* Biarkan mereka mengambil ruang yang sama */
+                min-width: 300px; /* Lebar minimum sebelum wrap */
+            }
+            /* Menghapus .map-wrapper jika tidak lagi digunakan secara terpisah */
+            .map-wrapper {
+                display: none; /* Sembunyikan map-wrapper jika tidak ingin peta besar terpisah */
+            }
+        }
+
+        /* Added CSS for the about-info to take full width when the image is removed */
+        .about-content {
+            display: flex;
+            justify-content: center; /* Center the content if it's a single column */
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .about-info {
+            flex-basis: 100%; /* Make about-info take full width */
+            max-width: 800px; /* Optional: set a max-width for better readability */
+            text-align: center; /* Center text within the about-info card */
+            padding: 20px; /* Add some padding */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-container" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                <div class="logo-text">Muhammad <span>Rayyan</span></div>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="#home">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="#about">About</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="#skills">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="#contact">Contact</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" id="hamburger-icon"></i>
+        </div>
+        <div class="dropdown" id="dropdown-menu">
+            <div class="links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+                <i class="fa-solid fa-xmark cancel" id="cancel-icon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home"> <div class="main-container">
+            <div class="image" data-aos="zoom-out" data-aos-duration="3000">
+                <img src="FOTO.jpg" alt="">
+            </div>
+            <div class="content">
+                <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">Welcome To My Site <span> Muhammad Rayyan</span></h1>
+                <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">Saya<span class="typewriter-text"></span><label for="">|</label></div>
+                <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100">Hallo Teman perkenalkan saya Muhammad Rayyan Yuwono saya adalah seorang front end development,saya mampu untuk mengoperasikan bahasa pemrograman dengan baik dengan menggunakan beberapa teknologi berupa HTML,CSS.DAN JAVA SCRIPT, Salam kenal!!</p>
+                <div class="social-links">
+                    <a target="_blank"href="https://github.com/rayyanzaaaaaaaa" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1300"><i class="fa-brands fa-github"></i></a>
+                    <a target="_blank" href="https://open.spotify.com/user/31i3b3b4x2k6s7m4q5d7e8f9?si=a6c9d7e7f8e94a5b" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1400"><i class="fa-brands fa-spotify"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/unknown-rayyan-b28118351/" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1500"><i class="fa-brands fa-linkedin"></i></a>
+                    <a target="_blank" href=" https://www.instagram.com/ray_coup_de_grace?igsh=dWJnY21mazAxN202" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1600"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <div class="btn" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="1800">
+                    <div class="btn" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="1800">
+ <a href="https://wa.me/6285648361572" target="_blank">
+    <button>Ingin Tau Lebih Tentang Saya?</button>
+ </a>
+</div>
+
+        </div>
+    </section>
+
+    <div class="animated-background">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+    </div>
+    
+    <section class="about" id="about">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">About <span>Me</span></h2>
+            
+            <div class="about-content">
+                <div class="about-info" data-aos="fade-left" data-aos-duration="1500">
+                    <div class="info-card">
+                        <div class="about-stats">
+                            <div class="stat">
+                                <i class="fas fa-award"></i>
+                                <div>
+                                    <h3>Experience</h3>
+                                    <p>Intermediate Front-End Development</p>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-code-branch"></i>
+                                <div>
+                                    <h3>Projects</h3>
+                                    <p>3+ Completed</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-details">
+                            <p class="about-description">
+                                Saya seorang Front-End Developer yang berdedikasi dengan passion mendalam dalam menciptakan pengalaman pengembangan web yang baik. Dengan pengalaman saya di sekolah SMKN 69 JAKARTA, saya telah mengembangkan keahlian dalam membangun website responsif, mengoptimalkan performa, dan mengimplementasikan animasi yang menarik. Saya juga memiliki pemahaman yang kuat tentang penggunaan bahasa pemrograman Front-end.
+                            </p>
+                            
+                            <ul class="about-highlights">
+                                <li><i class="fas fa-check-circle"></i> Membangun website responsif yang optimal di semua perangkat</li>
+                                <li><i class="fas fa-check-circle"></i> Mengoptimalkan performa website</li>
+                                <li><i class="fas fa-check-circle"></i> Mengimplementasikan animasi yang menarik</li>
+                                <li><i class="fas fa-check-circle"></i> Dapat Memahami Penggunaan Bahasa Pemrograman Front-end dengan baik</li>
+                            </ul>
+    
+                            <div class="education-section education-text-white">
+                                <h3><i class="fas fa-graduation-cap"></i> Riwayat Pendidikan Akhir Saat Ini </h3>
+                                <p>SMK Negeri 69 Jakarta - SIJA System Information Network And Application</p>
+                                <p>2023 - 2027</p>
+                            </div>
+    
+                            <div class="certifications-section">
+                                <h3><i class="fas fa-certificate"></i>Experience And partisipasi</h3>
+                                <ul>
+                                    <li>HTML & CSS - WebinarCamp </li>
+                                    <li>JavaScript Basic Code</li>
+                                    <li>Responsive Web Design - IDCamp</li>
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <a href="My portfolio Muhammad Rayyan Yuwono.pdf" class="button-3d" download="My_Portfolio_Muhammad_Rayyan_Yuwono.pdf">Download CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="skills" id="skills">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">My <span>Skills</span></h2>
+            
+            <div class="skills-content">
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500">
+                        <i class="fab fa-html5"></i>
+                        <h3>HTML5</h3>
+                        <p class="skill-description">kemampuan membangun struktur web yang efisien, semantik, dan responsif.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                        <span class="percentage">80%</span>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+                        <i class="fab fa-css3-alt"></i>
+                        <h3>CSS3</h3>        
+                        <p class="skill-description">keahlian membangun desain web yang modern dan interaktif.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 60%"></div>
+                        </div>    
+                        <span class="percentage">60%</span>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400">
+                        <i class="fab fa-js"></i>
+                        <h3>JavaScript</h3>
+                        <p class="skill-description">keahlian mengembangkan logika dan animasi yang responsif.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 50%"></div>
+                        </div>
+                        <span class="percentage">50%</span>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="600">
+                        <i class="fab fa-react"></i>
+                        <h3>React</h3>
+                        <p class="skill-description">menciptakan aplikasi web interaktif dengan performa tinggi.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                        <span class="percentage">65%</span>
+                    </div>
+
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="800">
+                        <i class="fab fa-bootstrap"></i>
+                        <h3>Bootstrap</h3>
+                        <p class="skill-description">ahli dalam membangun UI yang konsisten, dan mudah dikustomisasi.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                        <span class="percentage">80%</span>
+                    </div>
+
+                    <div class="skill-card" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="1000">
+                        <i class="fab fa-git-alt"></i>
+                        <h3>Git</h3>
+                        <p class="skill-description">keahlian mengelola versi kode secara efisien dan kolaboratif.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 60%"></div>
+                        </div>
+                        <span class="percentage">60%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-down" data-aos-duration="1500">Contact <span>Me</span></h2>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right" data-aos-duration="1500">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>muhammadrayyanyuwono@gmail.com</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone</h3>
+                        <p>+62 856-4836-1572</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Location</h3>
+                        <p>cakung Jakarta Timur, Indonesia</p>
+                        <div class="location-minimap-always-visible">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126930.57077977055!2d106.90673395!3d-6.197775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698bb2c2227289%3A0x66c8913c2005a305!2sCakung%2C%20East%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1719207908353!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="contact-form" class="contact-form" data-aos="fade-left" data-aos-duration="1500">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="glow-button">Send Message</button>
+                </form>
+
+                <div class="map-wrapper" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+                    <h3>Temukan Saya di Peta</h3>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126930.57077977055!2d106.90673395!3d-6.197775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698bb2c2227289%3A0x66c8913c2005a305!2sCakung%2C%20East%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1719207908353!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({offset:0});
+    </script>
+    <script src="script.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("yXwZoYrMc0QtWL-O-"); // Ganti dengan Public Key dari EmailJS
+        })();
+    
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+    
+            let templateParams = {
+                from_name: document.getElementById("name").value,
+                from_email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            };
+    
+            emailjs.send("service_nvpvito", "template_qqxyjgo", templateParams)
+                .then(function(response) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Berhasil!",
+                        text: "Email berhasil dikirim!",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK"
+                    });
+    
+                    // Reset form setelah berhasil
+                    document.getElementById("contact-form").reset();
+                }, function(error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Gagal mengirim email: " + error.text,
+                        confirmButtonColor: "#d33",
+                        confirmButtonText: "Coba Lagi"
+                    });
+                });
+        });
+
+        // Kode JavaScript untuk toggle hamburger menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const cancelIcon = document.getElementById('cancel-icon');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const dropdownLinks = dropdownMenu.querySelectorAll('.links a'); // Ambil semua link di dropdown
+
+            // Fungsi untuk menampilkan/menyembunyikan dropdown
+            function toggleDropdown() {
+                dropdownMenu.classList.toggle('show');
+            }
+
+            // Event listener untuk hamburger icon
+            if (hamburgerIcon) {
+                hamburgerIcon.addEventListener('click', toggleDropdown);
+            }
+
+            // Event listener untuk cancel icon
+            if (cancelIcon) {
+                cancelIcon.addEventListener('click', toggleDropdown);
+            }
+
+            // Tutup dropdown saat salah satu link di dropdown diklik
+            dropdownLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    dropdownMenu.classList.remove('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
