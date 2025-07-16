@@ -47,3 +47,10 @@ if (hamburgerIcon) {
 if (cancelIcon) {
     cancelIcon.addEventListener('click', toggleDropdown);
 }
+// Disable right-click on the home image
+            const homeImage = document.getElementById('home-image');
+            if (homeImage) {
+                homeImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            }
