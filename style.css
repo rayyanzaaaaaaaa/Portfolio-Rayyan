@@ -33,7 +33,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 20px; /* Default padding for larger screens */
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -687,6 +687,11 @@ section {
         display: block;
     }
     
+    /* MODIFIKASI: Padding horizontal yang lebih baik untuk nav-container di mobile */
+    .nav-container {
+        padding: 0 15px; /* Memberi ruang lebih di sisi kiri dan kanan */
+    }
+
     .main-container {
         flex-direction: column-reverse;
         text-align: center;
@@ -706,9 +711,8 @@ section {
     /* PENYESUAIAN FONT-SIZE UNTUK JUDUL UTAMA DI MOBILE */
     .content h1 {
         font-size: 2.2rem; /* Atur ukuran font fixed yang lebih kecil */
-        /* Anda bisa menggunakan clamp lagi, tapi dengan nilai vw yang lebih konservatif,
-           misalnya clamp(1.8rem, 6vw, 3rem);
-           Saya sarankan fixed value untuk memastikan tidak meluber */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     .content .typewriter {
         font-size: 1.5rem; /* Atur ukuran font fixed yang lebih kecil */
@@ -750,12 +754,14 @@ section {
 }
 
 @media (max-width: 480px) {
+    /* MODIFIKASI: Kurangi padding nav lebih lanjut di layar sangat kecil */
     .nav-container {
-        padding: 0 10px; /* Kurangi padding nav lebih lanjut */
+        padding: 0 8px; /* Lebih kecil lagi untuk layar sangat sempit */
     }
     
+    /* MODIFIKASI: Pastikan logo tidak terlalu besar sehingga menabrak hamburger */
     .logo-text {
-        font-size: 1.1rem; /* Sedikit lebih kecil untuk logo */
+        font-size: 1.0rem; /* Sedikit lebih kecil dari 1.1rem untuk layar 480px ke bawah */
     }
     
     .main-container .image {
@@ -809,6 +815,16 @@ section {
 }
 
 @media (max-width: 360px) {
+    /* MODIFIKASI: Padding nav paling minimal untuk layar sangat sangat kecil */
+    .nav-container {
+        padding: 0 5px; /* Minimal 5px di setiap sisi */
+    }
+
+    /* MODIFIKASI: Logo juga bisa lebih kecil lagi untuk layar sangat sempit */
+    .logo-text {
+        font-size: 0.9rem; 
+    }
+
     .main-container {
         padding: 15px 5px; /* Padding paling minimal */
     }
