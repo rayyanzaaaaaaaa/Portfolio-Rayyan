@@ -33,7 +33,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Default padding for larger screens */
+    padding: 0 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -196,11 +196,12 @@ section {
 }
 
 .content h1 {
-    font-size: clamp(1.8rem, 7vw, 3rem); 
+    /* MENGUBAH FONT-SIZE UNTUK JUDUL UTAMA AGAR LEBIH RESPONSIVE DI MOBILE */
+    font-size: clamp(1.8rem, 7vw, 3rem); /* Meningkatkan 'vw' untuk desktop, tapi di mobile akan tetap di 1.8rem jika terlalu kecil. Atau bisa pakai media query saja. */
     margin-bottom: 20px;
     line-height: 1.2;
-    word-wrap: break-word; 
-    overflow-wrap: break-word;
+    word-wrap: break-word; /* Memastikan teks bisa wrap jika terlalu panjang */
+    overflow-wrap: break-word; /* Alternatif untuk word-wrap */
 }
 
 .content h1 span {
@@ -209,6 +210,7 @@ section {
 }
 
 .content .typewriter {
+    /* MENGUBAH FONT-SIZE UNTUK TYPEWRITER */
     font-size: clamp(1.2rem, 5vw, 2rem);
     font-weight: 600;
     margin-bottom: 20px;
@@ -231,7 +233,7 @@ section {
     gap: 15px;
     margin: 30px 0;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center; /* Tambahkan ini agar link sosmed terpusat di mobile */
 }
 
 .social-links i {
@@ -258,7 +260,7 @@ section {
 
 .btn {
     margin-top: 30px;
-    text-align: center; 
+    text-align: center; /* Pusatkan tombol di mobile */
 }
 
 .btn button {
@@ -282,7 +284,7 @@ section {
     box-shadow: 0 0 30px blue;
 }
 
-/* Animated Background Optimizations */
+/* Animated Background */
 .animated-background {
     position: fixed;
     width: 100%;
@@ -292,8 +294,6 @@ section {
     z-index: -1;
     overflow: hidden;
     background: linear-gradient(45deg, #000000, #000033, #000066);
-    /* NEW: Mengurangi jumlah kubus secara default, akan disesuaikan di media query */
-    --num-cubes: 5; 
 }
 
 .cube {
@@ -302,12 +302,13 @@ section {
     height: 10px;
     border: solid 1px rgba(0, 0, 255, 0.3);
     animation: cube 15s ease-in-out forwards infinite;
-    /* NEW: Tambahkan properti untuk hardware acceleration */
-    will-change: transform, opacity; 
 }
 
-/* Anda bisa mengontrol jumlah kubus dari JavaScript atau melalui CSS (dengan HTML yang diulang) */
-/* Untuk optimasi visual yang lebih baik di berbagai ukuran, kita akan menonaktifkan atau menyesuaikan jumlah kubus di media queries */
+.cube:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.cube:nth-child(2) { top: 40%; left: 80%; animation-delay: 2s; }
+.cube:nth-child(3) { top: 60%; left: 30%; animation-delay: 4s; }
+.cube:nth-child(4) { top: 80%; left: 70%; animation-delay: 6s; }
+.cube:nth-child(5) { top: 30%; left: 90%; animation-delay: 8s; }
 
 @keyframes cube {
     0% {
@@ -354,6 +355,28 @@ section {
     gap: 50px;
     align-items: center;
 }
+
+/* The about-image was removed from your HTML, so this block won't apply */
+/* .about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-frame {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid blue;
+    box-shadow: 0 0 30px rgba(0, 0, 255, 0.5);
+}
+
+.image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} */
 
 .info-card {
     background: rgba(0, 0, 255, 0.05);
@@ -664,33 +687,31 @@ section {
         display: block;
     }
     
-    .nav-container {
-        padding: 0 15px; 
-    }
-
     .main-container {
         flex-direction: column-reverse;
         text-align: center;
         gap: 30px;
-        padding: 20px 15px; 
+        padding: 20px 15px; /* Sesuaikan padding horizontal untuk mobile */
     }
     
     .main-container .image {
-        max-width: 250px; 
+        max-width: 250px; /* Sedikit perkecil ukuran gambar di mobile */
     }
     
     .main-container .content {
-        max-width: 100%; 
-        padding: 0 5px; 
+        max-width: 100%; /* Pastikan konten mengambil lebar penuh */
+        padding: 0 5px; /* Tambahkan sedikit padding internal agar teks tidak terlalu menempel tepi */
     }
     
+    /* PENYESUAIAN FONT-SIZE UNTUK JUDUL UTAMA DI MOBILE */
     .content h1 {
-        font-size: 2.2rem; 
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        font-size: 2.2rem; /* Atur ukuran font fixed yang lebih kecil */
+        /* Anda bisa menggunakan clamp lagi, tapi dengan nilai vw yang lebih konservatif,
+           misalnya clamp(1.8rem, 6vw, 3rem);
+           Saya sarankan fixed value untuk memastikan tidak meluber */
     }
     .content .typewriter {
-        font-size: 1.5rem; 
+        font-size: 1.5rem; /* Atur ukuran font fixed yang lebih kecil */
     }
 
     .social-links {
@@ -718,38 +739,27 @@ section {
     }
     
     .section-container {
-        padding: 60px 15px; 
+        padding: 60px 15px; /* Sesuaikan padding horizontal untuk mobile */
     }
 
+    /* Memastikan semua bagian memiliki padding horizontal yang cukup di mobile */
     .about, .skills, .contact {
         padding-left: 15px;
         padding-right: 15px;
-    }
-
-    /* Optimasi 3D untuk Tablet/Small Laptop */
-    .animated-background .cube {
-        width: 8px; /* Sedikit perkecil ukuran kubus */
-        height: 8px;
-        /* NEW: Kurangi jumlah kubus yang terlihat dengan menonaktifkan beberapa nth-child */
-        display: none; 
-    }
-    /* Aktifkan hanya beberapa saja (misalnya 3 kubus) */
-    .cube:nth-child(1), .cube:nth-child(2), .cube:nth-child(3) {
-        display: block; 
     }
 }
 
 @media (max-width: 480px) {
     .nav-container {
-        padding: 0 8px; 
+        padding: 0 10px; /* Kurangi padding nav lebih lanjut */
     }
     
     .logo-text {
-        font-size: 1.0rem; 
+        font-size: 1.1rem; /* Sedikit lebih kecil untuk logo */
     }
     
     .main-container .image {
-        max-width: 200px; 
+        max-width: 200px; /* Lebih kecil lagi untuk gambar profil */
     }
     
     .social-links i {
@@ -771,64 +781,44 @@ section {
     }
     
     .section-container {
-        padding: 40px 10px; 
+        padding: 40px 10px; /* Padding keseluruhan lebih ketat */
     }
     
     .about-highlights li {
-        font-size: 0.85rem; 
+        font-size: 0.85rem; /* Ukuran font highlight lebih kecil */
     }
     
     .button-3d {
-        padding: 10px 20px; 
+        padding: 10px 20px; /* Tombol lebih kecil */
         font-size: 0.9rem;
     }
     .btn button {
-        font-size: 1rem; 
+        font-size: 1rem; /* Ukuran tombol Home juga disesuaikan */
     }
 
+    /* Penyesuaian font size untuk judul utama dan typewriter pada layar sangat kecil */
     .content h1 {
-        font-size: 2rem; 
+        font-size: 2rem; /* Adjust if 2.2rem is still too big on very small screens */
     }
     .content .typewriter {
-        font-size: 1.3rem; 
+        font-size: 1.3rem; /* Adjust if 1.5rem is still too big */
     }
     .content p {
-        font-size: 0.9rem; 
+        font-size: 0.9rem; /* Adjust paragraph font size */
     }
-
-    /* Optimasi 3D untuk Ponsel */
-    .animated-background .cube {
-        width: 6px; /* Lebih kecil lagi */
-        height: 6px;
-        /* NEW: Hanya tampilkan 1 atau 2 kubus untuk performa maksimal di ponsel */
-        display: none; 
-    }
-    .cube:nth-child(1), .cube:nth-child(2) { /* Atau hanya 1 jika dirasa masih berat */
-        display: block;
-    }
-    /* Anda juga bisa mempertimbangkan untuk mengubah durasi animasi atau menonaktifkannya sepenuhnya */
-    /* .cube { animation: none; } */
 }
 
 @media (max-width: 360px) {
-    .nav-container {
-        padding: 0 5px; 
-    }
-
-    .logo-text {
-        font-size: 0.9rem; 
-    }
-
     .main-container {
-        padding: 15px 5px; 
+        padding: 15px 5px; /* Padding paling minimal */
     }
     
     .main-container .image {
-        max-width: 180px; 
+        max-width: 180px; /* Gambar profil lebih kecil lagi */
     }
     
     .social-links {
-        gap: 8px; 
+        gap: 8px; /* Jarak sosmed lebih rapat */
     }
     
     .social-links i {
@@ -846,44 +836,38 @@ section {
     }
 
     .section-title {
-        font-size: 1.8rem; 
+        font-size: 1.8rem; /* Judul section lebih kecil */
     }
     .content h1 {
-        font-size: 1.8rem; 
+        font-size: 1.8rem; /* Ukuran font h1 di layar terkecil */
     }
     .content .typewriter {
-        font-size: 1.2rem; 
+        font-size: 1.2rem; /* Ukuran font typewriter di layar terkecil */
     }
-
-    /* Optimasi 3D ekstrem untuk layar sangat kecil */
-    .animated-background .cube {
-        display: none; /* Menonaktifkan semua kubus */
-    }
-    /* Jika Anda masih ingin ada satu atau dua kubus, atur `display: block;` lagi untuk nth-child yang diinginkan */
 }
 
 /* Existing CSS untuk scroll-to-top button */
 #scrollToTopBtn {
-    display: none; 
-    position: fixed; 
-    bottom: 20px; 
-    right: 30px; 
-    z-index: 99; 
-    border: none; 
-    outline: none; 
-    background-color: #555; 
-    color: white; 
-    cursor: pointer; 
-    padding: 15px; 
-    border-radius: 10px; 
-    font-size: 18px; 
-    opacity: 0.7; 
-    transition: opacity 0.3s; 
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    bottom: 20px; /* 20px from the bottom */
+    right: 30px; /* 30px from the right */
+    z-index: 99; /* Make sure it's above other content */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #555; /* A grey background */
+    color: white; /* White text */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    opacity: 0.7; /* Slightly transparent */
+    transition: opacity 0.3s; /* Smooth transition for opacity */
 }
 
 #scrollToTopBtn:hover {
-    background-color: #555; 
-    opacity: 1; 
+    background-color: #555; /* Darker background on hover */
+    opacity: 1; /* Fully opaque on hover */
 }
 
 /* Pastikan semua teks di dalam .about-info berwarna putih */
@@ -891,24 +875,27 @@ section {
 .about-info h3,
 .about-info p,
 .about-highlights li,
-.about-highlights li i, 
+.about-highlights li i, /* Pastikan ikon juga putih jika ada teks di sampingnya */
 .education-section h3,
 .education-section p,
 .certifications-section h3,
 .certifications-section li {
-    color: white !important; 
+    color: white !important; /* Tambahkan !important untuk memastikan override semua gaya */
 }
 
+/* Jika ada ikon di dalam stat card yang belum putih, tambahkan ini */
 .stat i {
-    color: blue !important; 
+    color: blue !important; /* Ini sudah biru, biarkan saja jika ingin tetap biru */
 }
 
+/* Anda sudah punya ini, biarkan saja */
 .education-text-white,
 .education-text-white h3,
 .education-text-white p {
     color: white !important;
 }
 
+/* Untuk bullet point pada sertifikasi jika belum putih */
 .certifications-section li::before {
-    color: blue !important; 
+    color: blue !important; /* Ini sudah biru, biarkan saja jika ingin tetap biru */
 }
