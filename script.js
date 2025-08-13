@@ -47,3 +47,46 @@ if (hamburgerIcon) {
 if (cancelIcon) {
     cancelIcon.addEventListener('click', toggleDropdown);
 }
+// Disable right-click on the home image
+            const homeImage = document.getElementById('home-image');
+            if (homeImage) {
+                homeImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+    // ... (Your existing JavaScript code) ...
+
+    // --- Add this new JavaScript code to prevent zoom ---
+
+    // Prevent pinch-to-zoom for most browsers
+    document.addEventListener('touchmove', function(event) {
+        // Check if there are multiple touches (indicating pinch)
+        if (event.touches.length > 1) {
+            event.preventDefault(); // Prevent default browser zoom behavior
+        }
+    }, { passive: false }); // Use { passive: false } to allow preventDefault()
+
+    // Prevent zoom gestures specifically for some iOS versions
+    document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+        // document.body.style.zoom = 0.99; // Some sources suggest this as a hack, but it can be problematic
+    }, { passive: false });
+
+    document.addEventListener('gesturechange', function(e) {
+        e.preventDefault();
+        // document.body.style.zoom = 0.99; // Same as above
+    }, { passive: false });
+
+    document.addEventListener('gestureend', function(e) {
+        e.preventDefault();
+        // document.body.style.zoom = 1; // Same as above
+    }, { passive: false });
+
+    // Optional: Prevent zoom on certain input fields (mobile browsers sometimes zoom on focus)
+    // Ensure input font size is at least 16px to prevent automatic zoom on focus
+    // This is more of a guideline for input fields than a general zoom prevention.
+    document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(input => {
+        input.style.fontSize = '16px'; // Set minimum font size
+    });
+});

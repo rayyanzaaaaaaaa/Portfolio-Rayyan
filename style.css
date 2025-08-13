@@ -12,7 +12,8 @@ body {
     width: 100%;
     min-height: 100vh;
     background-color: black;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Pastikan tidak ada scrollbar horizontal yang tidak diinginkan */
+    touch-action: manipulation; /* Added based on user's existing CSS */
 }
 
 /* Navigation Styles */
@@ -23,8 +24,10 @@ nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
+    /* --- MODIFIED --- */
+    background-color: black; /* Changed to solid black */
+    /* Removed backdrop-filter: blur(10px); */
+    /* ---------------- */
 }
 
 .nav-container {
@@ -150,7 +153,7 @@ nav {
 section {
     width: 100%;
     min-height: 90vh;
-    padding: 20px;
+    padding: 20px; /* Default padding for sections */
 }
 
 .main-container {
@@ -192,13 +195,16 @@ section {
 .main-container .content {
     flex: 1;
     color: white;
-    max-width: 600px;
+    max-width: 600px; /* Keep max-width for larger screens */
 }
 
 .content h1 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
+    /* MENGUBAH FONT-SIZE UNTUK JUDUL UTAMA AGAR LEBIH RESPONSIVE DI MOBILE */
+    font-size: clamp(1.8rem, 7vw, 3rem); /* Meningkatkan 'vw' untuk desktop, tapi di mobile akan tetap di 1.8rem jika terlalu kecil. Atau bisa pakai media query saja. */
     margin-bottom: 20px;
     line-height: 1.2;
+    word-wrap: break-word; /* Memastikan teks bisa wrap jika terlalu panjang */
+    overflow-wrap: break-word; /* Alternatif untuk word-wrap */
 }
 
 .content h1 span {
@@ -207,7 +213,8 @@ section {
 }
 
 .content .typewriter {
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    /* MENGUBAH FONT-SIZE UNTUK TYPEWRITER */
+    font-size: clamp(1.2rem, 5vw, 2rem);
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -229,6 +236,7 @@ section {
     gap: 15px;
     margin: 30px 0;
     flex-wrap: wrap;
+    justify-content: center; /* Tambahkan ini agar link sosmed terpusat di mobile */
 }
 
 .social-links i {
@@ -255,6 +263,7 @@ section {
 
 .btn {
     margin-top: 30px;
+    text-align: center; /* Pusatkan tombol di mobile */
 }
 
 .btn button {
@@ -322,7 +331,7 @@ section {
 .section-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 20px;
+    padding: 80px 20px; /* Default padding */
 }
 
 .section-title {
@@ -350,7 +359,8 @@ section {
     align-items: center;
 }
 
-.about-image {
+/* The about-image was removed from your HTML, so this block won't apply */
+/* .about-image {
     display: flex;
     justify-content: center;
 }
@@ -369,7 +379,7 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+} */
 
 .info-card {
     background: rgba(0, 0, 255, 0.05);
@@ -684,17 +694,29 @@ section {
         flex-direction: column-reverse;
         text-align: center;
         gap: 30px;
-        padding: 20px;
+        padding: 20px 15px; /* Sesuaikan padding horizontal untuk mobile */
     }
     
     .main-container .image {
-        max-width: 300px;
+        max-width: 250px; /* Sedikit perkecil ukuran gambar di mobile */
     }
     
     .main-container .content {
-        max-width: 100%;
+        max-width: 100%; /* Pastikan konten mengambil lebar penuh */
+        padding: 0 5px; /* Tambahkan sedikit padding internal agar teks tidak terlalu menempel tepi */
     }
     
+    /* PENYESUAIAN FONT-SIZE UNTUK JUDUL UTAMA DI MOBILE */
+    .content h1 {
+        font-size: 2.2rem; /* Atur ukuran font fixed yang lebih kecil */
+        /* Anda bisa menggunakan clamp lagi, tapi dengan nilai vw yang lebih konservatif,
+            misalnya clamp(1.8rem, 6vw, 3rem);
+            Saya sarankan fixed value untuk memastikan tidak meluber */
+    }
+    .content .typewriter {
+        font-size: 1.5rem; /* Atur ukuran font fixed yang lebih kecil */
+    }
+
     .social-links {
         justify-content: center;
     }
@@ -720,27 +742,33 @@ section {
     }
     
     .section-container {
-        padding: 60px 15px;
+        padding: 60px 15px; /* Sesuaikan padding horizontal untuk mobile */
+    }
+
+    /* Memastikan semua bagian memiliki padding horizontal yang cukup di mobile */
+    .about, .skills, .contact {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 
 @media (max-width: 480px) {
     .nav-container {
-        padding: 0 15px;
+        padding: 0 10px; /* Kurangi padding nav lebih lanjut */
     }
     
     .logo-text {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Sedikit lebih kecil untuk logo */
     }
     
     .main-container .image {
-        max-width: 250px;
+        max-width: 200px; /* Lebih kecil lagi untuk gambar profil */
     }
     
     .social-links i {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
     }
     
     .skills-grid {
@@ -756,36 +784,50 @@ section {
     }
     
     .section-container {
-        padding: 40px 10px;
+        padding: 40px 10px; /* Padding keseluruhan lebih ketat */
     }
     
     .about-highlights li {
-        font-size: 0.9rem;
+        font-size: 0.85rem; /* Ukuran font highlight lebih kecil */
     }
     
     .button-3d {
-        padding: 12px 25px;
-        font-size: 1rem;
+        padding: 10px 20px; /* Tombol lebih kecil */
+        font-size: 0.9rem;
+    }
+    .btn button {
+        font-size: 1rem; /* Ukuran tombol Home juga disesuaikan */
+    }
+
+    /* Penyesuaian font size untuk judul utama dan typewriter pada layar sangat kecil */
+    .content h1 {
+        font-size: 2rem; /* Adjust if 2.2rem is still too big on very small screens */
+    }
+    .content .typewriter {
+        font-size: 1.3rem; /* Adjust if 1.5rem is still too big */
+    }
+    .content p {
+        font-size: 0.9rem; /* Adjust paragraph font size */
     }
 }
 
 @media (max-width: 360px) {
     .main-container {
-        padding: 15px 10px;
+        padding: 15px 5px; /* Padding paling minimal */
     }
     
     .main-container .image {
-        max-width: 220px;
+        max-width: 180px; /* Gambar profil lebih kecil lagi */
     }
     
     .social-links {
-        gap: 10px;
+        gap: 8px; /* Jarak sosmed lebih rapat */
     }
     
     .social-links i {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
     
     .skill-card {
@@ -795,9 +837,19 @@ section {
     .contact-card {
         padding: 15px;
     }
-}
-/* Existing CSS */
 
+    .section-title {
+        font-size: 1.8rem; /* Judul section lebih kecil */
+    }
+    .content h1 {
+        font-size: 1.8rem; /* Ukuran font h1 di layar terkecil */
+    }
+    .content .typewriter {
+        font-size: 1.2rem; /* Ukuran font typewriter di layar terkecil */
+    }
+}
+
+/* Existing CSS untuk scroll-to-top button */
 #scrollToTopBtn {
     display: none; /* Hidden by default */
     position: fixed; /* Fixed position */
@@ -820,20 +872,6 @@ section {
     background-color: #555; /* Darker background on hover */
     opacity: 1; /* Fully opaque on hover */
 }
-/* About Section */
-.about {
-    background-color: black;
-    padding: 80px 0;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 50px;
-    align-items: center;
-}
-
-/* ... (Kode CSS lainnya di dalam About Section, tidak perlu diubah) ... */
 
 /* Pastikan semua teks di dalam .about-info berwarna putih */
 .about-info,
@@ -864,5 +902,3 @@ section {
 .certifications-section li::before {
     color: blue !important; /* Ini sudah biru, biarkan saja jika ingin tetap biru */
 }
-
-/* ... (Sisa kode CSS Anda) ... */
